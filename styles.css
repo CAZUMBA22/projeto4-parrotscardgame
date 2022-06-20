@@ -34,10 +34,7 @@
         transition: all .3s ease-out;
         position: relative;
         transform-style: preserve-3d;
-        margin: 17px 17px;
-     
-
-        
+        margin: 17px 17px;  
     }
     
     .front,
