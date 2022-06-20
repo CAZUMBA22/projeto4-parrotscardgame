@@ -22,7 +22,11 @@ inicio()
 
 //recebe e filtra quantidade certa a ser passada
 function inicio(){
-    quantidade = prompt('Quantas cartas?')
+    quantidade = prompt(`
+    Quantas cartas?
+    Você pode escolher entre 4 e 14 cartas
+     todas pares
+     `)
     while(quantidade < 4 || quantidade > 14 || quantidade%2 !== 0){
     quantidade = prompt('Quantas cartas?')
     } 
@@ -38,8 +42,6 @@ function comparador() {
 
 
 // junta cartas em dupla na nova array e ja embaralha na saida
-
-
 function embaralhar(quantidade){
     
     for(let i=0; i < quantidade/2; i++){
@@ -104,7 +106,7 @@ function msgVitoria(){
     perguntaIrNovamente() 
       }
     }
-    
+// funcao reeinica jogo     
     function perguntaIrNovamente(){
         let irnoNovamente = prompt('Deseja jogar Novamente?')
         if(irnoNovamente === 'sim'){
