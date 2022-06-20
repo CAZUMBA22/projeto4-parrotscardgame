@@ -8,22 +8,28 @@ const imgBack = [
 'tripletsparrot',
 'unicornparrot'] 
 
+let quantidade 
 const imgEmabralhada =[]
 let listacomparacao = []
-contadorCartaClicada = 0
+let contadorCartaClicada = 0
 let contadorAcertos = 0
+let contadorJogadas =0
+let primeiraCarta 
 
-//embaralha gifs 
 
 
+inicio()
 
 //recebe e filtra quantidade certa a ser passada
+function inicio(){
+    quantidade = prompt('Quantas cartas?')
 
-let quantidade = prompt('Quantas cartas?')
+    while(quantidade < 4 || quantidade > 14 || quantidade%2 !== 0){
+    quantidade = prompt('Quantas cartas?')
+    } 
+} 
 
-while(quantidade < 4 || quantidade > 14 || quantidade%2 !== 0){
- quantidade = prompt('Quantas cartas?')
-}  
+
 // Esta função pode ficar separada do código acima, onde você preferir
 function comparador() { 
 	return Math.random() - 0.5; 
@@ -33,6 +39,7 @@ function comparador() {
 
 // junta cartas em dupla na nova array e ja embaralha na saida
 embaralhar(quantidade)
+
 function embaralhar(quantidade){
     
     for(let i=0; i < quantidade/2; i++){
@@ -63,14 +70,18 @@ function embaralhar(quantidade){
 
 //seleciona/vira carta//
 function selecionar(elemento) {
-    if(contadorCartaClicada < 2){
+    if(contadorCartaClicada < 2 && elemento != primeiraCarta){
+    if(contadorCartaClicada == 0){
+        primeiraCarta = elemento
+    }
     elemento.classList.add('virada')
     listacomparacao.push(elemento.querySelector('.back img'))
     contadorCartaClicada ++
+    contadorJogadas ++
     setTimeout(comparacao, 1000)
     }
 }
-
+//compara cartas iguais e desvira
 function comparacao(elemento){
     if(contadorCartaClicada == 2){
         contadorCartaClicada = 0
@@ -83,16 +94,30 @@ function comparacao(elemento){
          listacomparacao = [] 
          msgVitoria()   
         }
-
-    }
-
-    function msgVitoria(){
-        if (quantidade/2 == contadorAcertos){
-            alert('Parabens, você ganhou!!')
-
-        }
-
     }
 }
+
+//alerta de vitoria 
+function msgVitoria(){
+    if (quantidade/2 == contadorAcertos){
+     alert(`Parabens, você ganhou em ${contadorJogadas} !!`)
+    perguntaIrNovamente() 
+      }
+    }
+    
+    function perguntaIrNovamente(){
+        let irnoNovamente = prompt('Deseja jogar Novamente?')
+        if(irnoNovamente === 'sim'){
+            let gameCompleto = document.querySelector('.container_cards') 
+            gameCompleto.innerHTML = '<div class="container_cards"></div>'
+            funcaoteste()
+        }
+      
+
+    }
+
+  
+    
+
 
 
