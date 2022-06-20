@@ -1,4 +1,4 @@
-//nomeando array de gifs
+//nomeando globais
 const imgBack = [ 
 'bobrossparrot', 
 'explodyparrot',
@@ -7,6 +7,8 @@ const imgBack = [
 'revertitparrot',
 'tripletsparrot',
 'unicornparrot'] 
+
+const imgEmabralhada =[]
 
 //embaralha gifs 
 
@@ -19,18 +21,24 @@ let quantidade = prompt('Quantas cartas?')
 while(quantidade < 4 || quantidade > 14 || quantidade%2 !== 0){
  quantidade = prompt('Quantas cartas?')
 }  
-darCratas(quantidade)
+// Esta função pode ficar separada do código acima, onde você preferir
+function comparador() { 
+	return Math.random() - 0.5; 
+}
 
+
+embaralhar(quantidade)
 // junta cartas nova array
 function embaralhar(quantidade){
-    const imgEmabralhada =[]
-    for(let i=0; i < quantidade; i++){
+    
+    for(let i=0; i < quantidade/2; i++){
         imgEmabralhada.push(imgBack[i])
         imgEmabralhada.push(imgBack[i])
         }
+        imgEmabralhada.sort(comparador)
         darCratas(imgEmabralhada)
     }
-
+   
 
 // usa quantidade recebida pra distribuir cartas
  function darCratas(imgEmabralhada){
@@ -38,7 +46,7 @@ function embaralhar(quantidade){
     document.querySelector('.container_cards').innerHTML += `
         <div class="card" onclick="selecionar(this)">
            <div class="back">
-              <img src="./img/${Math.random(imgEmabralhada[i])*quantidade}.gif">
+              <img src="./img/${imgEmabralhada[i]}.gif">
             </div>
             <div class="front">
              <img src="./img/front.png">
@@ -54,10 +62,4 @@ function selecionar(elemento) {
 
 }
 
-minhaArray.sort(comparador); // Após esta linha, a minhaArray estará embaralhada
 
-
-// Esta função pode ficar separada do código acima, onde você preferir
-function comparador() { 
-	return Math.random() - 0.5; 
-}
