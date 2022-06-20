@@ -9,12 +9,15 @@ const imgBack = [
 'unicornparrot'] 
 
 const imgEmabralhada =[]
+let listacomparacao = []
+contadorCartaClicada = 0
+let contadorAcertos = 0
 
 //embaralha gifs 
 
 
 
-//recebe e filtra quantidade
+//recebe e filtra quantidade certa a ser passada
 
 let quantidade = prompt('Quantas cartas?')
 
@@ -27,8 +30,9 @@ function comparador() {
 }
 
 
+
+// junta cartas em dupla na nova array e ja embaralha na saida
 embaralhar(quantidade)
-// junta cartas nova array
 function embaralhar(quantidade){
     
     for(let i=0; i < quantidade/2; i++){
@@ -53,13 +57,42 @@ function embaralhar(quantidade){
             </div>
         </div>   
         `
+       
     }
 }
 
 //seleciona/vira carta//
 function selecionar(elemento) {
-    elemento.classList.toggle('virada')
+    if(contadorCartaClicada < 2){
+    elemento.classList.add('virada')
+    listacomparacao.push(elemento.querySelector('.back img'))
+    contadorCartaClicada ++
+    setTimeout(comparacao, 1000)
+    }
+}
 
+function comparacao(elemento){
+    if(contadorCartaClicada == 2){
+        contadorCartaClicada = 0
+        if(listacomparacao[0].src !== listacomparacao[1].src){
+        listacomparacao[0].parentNode.parentNode.classList.remove('virada') 
+        listacomparacao[1].parentNode.parentNode.classList.remove('virada')
+        listacomparacao = []    
+        }else{
+         contadorAcertos ++ 
+         listacomparacao = [] 
+         msgVitoria()   
+        }
+
+    }
+
+    function msgVitoria(){
+        if (quantidade/2 == contadorAcertos){
+            alert('Parabens, você ganhou!!')
+
+        }
+
+    }
 }
 
 
