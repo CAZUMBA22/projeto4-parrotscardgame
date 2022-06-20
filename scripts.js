@@ -23,10 +23,10 @@ inicio()
 //recebe e filtra quantidade certa a ser passada
 function inicio(){
     quantidade = prompt('Quantas cartas?')
-
     while(quantidade < 4 || quantidade > 14 || quantidade%2 !== 0){
     quantidade = prompt('Quantas cartas?')
     } 
+    embaralhar(quantidade)
 } 
 
 
@@ -38,7 +38,7 @@ function comparador() {
 
 
 // junta cartas em dupla na nova array e ja embaralha na saida
-embaralhar(quantidade)
+
 
 function embaralhar(quantidade){
     
@@ -109,11 +109,16 @@ function msgVitoria(){
         let irnoNovamente = prompt('Deseja jogar Novamente?')
         if(irnoNovamente === 'sim'){
             let gameCompleto = document.querySelector('.container_cards') 
-            gameCompleto.innerHTML = '<div class="container_cards"></div>'
-            funcaoteste()
+            gameCompleto.innerHTML = ''
+            let quantidade 
+            const imgEmabralhada =[]
+            let listacomparacao = []
+            let contadorCartaClicada = 0
+            let contadorAcertos = 0
+            let contadorJogadas =0
+            let primeiraCarta 
+            inicio()
         }
-      
-
     }
 
   
